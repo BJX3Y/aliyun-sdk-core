@@ -1,0 +1,37 @@
+{
+    "name": "bjx3y/aliyun-sdk-core",
+    "description": "The Core SDK for Aliyun",
+    "keywords": [
+        "aliyun",
+        "sdk",
+        "core"
+    ],
+    "homepage": "https://github.com/BJX3Y/aliyun-sdk-core",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "BJX3Y",
+            "email": "changhongbo0812@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aliyun\\Core\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aliyun\\Core\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

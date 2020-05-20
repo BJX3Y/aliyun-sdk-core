@@ -1,0 +1,19 @@
+.idea/
+vendor/
+build/
+runtime/
+env.*
+!env.test
+!k8s/**/env.*
+.env
+logs/
+
+.DS_Store
+
+# vim
+*.un~
+.*.un~
+*.vim
+*.swp
+.netrwhist
+tags

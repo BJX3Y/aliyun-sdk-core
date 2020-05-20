@@ -1,0 +1,11 @@
+#! /bin/bash
+
+# Usages:
+# scripts/docker-env [extra docker args]
+
+docker run -it --rm \
+-v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa \
+-v ${COMPOSER_HOST:-$HOME/.composer}:/tmp \
+-p 7799:7799 -v $(pwd):/srv/www \
+$* \
+registry.seiue.com/devops/images/php-7.3:0.3-cli-dev bash
