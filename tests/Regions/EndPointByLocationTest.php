@@ -18,8 +18,8 @@ class EndPointByLocationTest extends BaseTest
         # 创建 DefaultAcsClient 实例并初始化
         $this->clientProfile = DefaultProfile::getProfile(
             "cn-shanghai",                   # 您的 Region ID
-            "<your AK>",               # 您的 Access Key ID
-            "<your Secret>"            # 您的 Access Key Secret
+            getenv('id'),               # 您的 Access Key ID
+            getenv("secret")            # 您的 Access Key Secret
         );
 
         $this->locationService = new LocationService($this->clientProfile);

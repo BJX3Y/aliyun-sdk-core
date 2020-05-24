@@ -1,0 +1,80 @@
+#! /bin/bash
+
+php=${PHP_BIN:=php}
+params=
+coverage_param=
+
+xdebug_params="
+    -d xdebug.remote_enable=1
+    -d xdebug.remote_autostart=1
+    -d xdebug.remote_port=9000
+    -d xdebug.remote_host=127.0.0.1
+"
+
+do_help()
+{
+    echo "Chalk Tests Runner"
+    echo
+    echo "Usage:"
+    echo "  scripts/run-tests [arguments]"
+    echo
+    echo "  arguments:   Arguments to phpunit"
+    echo
+    echo "  -h|--help:   Show this help."
+    echo
+    echo "  -x|--xdebug  Run under xdebug"
+    echo
+}
+
+do_run()
+{
+    $php $params vendor/bin/phpunit $coverage_param $*
+}
+
+wd=$(pwd)
+
+filter_args()
+{
+    args=
+    for arg in "$@"
+    do
+        if [[ "$arg" == "-x" || "$arg" == "--xdebug" ]] ; then
+            continue
+        fi
+        if [[ "$arg" == "--coverage" ]] ; then
+            continue
+        fi
+
+        args="$args $arg"
+    done
+
+    echo $args
+}
+
+prepare_params()
+{
+    for arg in "$@"
+    do
+        if [[ "$arg" == "-x" || "$arg" == "--xdebug" ]] ; then
+            params="$params $xdebug_params"
+        fi
+        if [[ "$arg" == "--coverage" ]] ; then
+            coverage_param="--coverage-text --colors=never"
+        fi
+    done
+}
+
+prepare_params $*
+
+case $1 in
+    -h|--help)
+        do_help
+    ;;
+    -a|--all)
+        shift
+        do_run_all $(filter_args $*)
+    ;;
+    *)
+        do_run  $(filter_args $*)
+    ;;
+esac;

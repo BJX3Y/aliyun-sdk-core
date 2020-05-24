@@ -26,13 +26,12 @@ use Aliyun\Core\Profile\DefaultProfile;
 
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var IAcsClient|null */
+    /** @var DefaultAcsClient|null */
     public $client = null;
     public function setUp()
     {
         $path = substr(dirname(__FILE__), 0, strripos(dirname(__FILE__), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR;
         include_once $path.'Config.php';
-
         $iClientProfile = DefaultProfile::getProfile("cn-hangzhou", "AccessKey", "AccessSecret");
         $this->client = new DefaultAcsClient($iClientProfile);
     }
